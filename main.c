@@ -103,35 +103,44 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-           /* USER CODE END WHILE */
-
-	       /* USER CODE END WHILE */
-
-            HAL_UART_Receive(&huart3,  rx_buffer, 1, 10);
-
+       //Receive input from serial monitor
+	   HAL_UART_Receive(&huart3,  rx_buffer, 1, 10);
+           //check the input is 0
 		   if(strcmp((int8_t *)rx_buffer, one)==0)
 			   {
+			      //Transmit 1 to ESP32
+				  HAL_UART_Transmit(&huart7,  rx_buffer, 1, 10);
+				  //set PA1 as LOW
 				  HAL_GPIO_WritePin(GPIOA, LED_1_Pin, GPIO_PIN_RESET);
 			   }
-			    //HAL_Delay(500);
 
 		   if(strcmp((int8_t *)rx_buffer, two)==0)
 				{
+			        //Transmit 2 to ESP32
+					HAL_UART_Transmit(&huart7,  rx_buffer, 1, 10);
+					//set PA2 as LOW
 					HAL_GPIO_WritePin(GPIOA, LED_2_Pin, GPIO_PIN_RESET);
 				}
+
 		   if(strcmp((int8_t *)rx_buffer, three)==0)
-		  		{
-			        HAL_GPIO_WritePin(LED_3_GPIO_Port, LED_3_Pin, GPIO_PIN_RESET);
-		  		}
+				{
+			        //Transmit 3 to ESP32
+					HAL_UART_Transmit(&huart7,  rx_buffer, 1, 10);
+					//set PH2 as LOW
+					HAL_GPIO_WritePin(LED_3_GPIO_Port, LED_3_Pin, GPIO_PIN_RESET);
+				}
+
 		   if(strcmp((int8_t *)rx_buffer, "0")==0)
-		   	  	{
-		   	  		HAL_GPIO_WritePin(GPIOA, LED_1_Pin, GPIO_PIN_SET);
-		   	  		HAL_GPIO_WritePin(GPIOA, LED_2_Pin, GPIO_PIN_SET);
-		   	  	    HAL_GPIO_WritePin(LED_3_GPIO_Port, LED_3_Pin, GPIO_PIN_SET);
+				{
+			        //Transmit 0 to ESP32
+					HAL_UART_Transmit(&huart7,  rx_buffer, 1, 10);
+					//set PA1, PA2, PH2 as LOW
+					HAL_GPIO_WritePin(GPIOA, LED_1_Pin, GPIO_PIN_SET);
+					HAL_GPIO_WritePin(GPIOA, LED_2_Pin, GPIO_PIN_SET);
+					HAL_GPIO_WritePin(LED_3_GPIO_Port, LED_3_Pin, GPIO_PIN_SET);
 
-		   	  	}
+				}
 
-    /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
 }
@@ -320,7 +329,3 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
-
-
-
-
