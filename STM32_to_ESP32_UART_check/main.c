@@ -61,7 +61,8 @@ static void MX_UART7_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 UART_HandleTypeDef huart3;
-int8_t rx_buffer[1], tx_buffer[4]="Type";
+//to receive data from Serial monitor
+int8_t rx_buffer[1];
 /* USER CODE END 0 */
 
 /**
@@ -110,7 +111,7 @@ int main(void)
 			   {
 			      //Transmit 1 to ESP32
 				  HAL_UART_Transmit(&huart7,  rx_buffer, 1, 10);
-				  //set PA1 as LOW
+				  //set PA1 as LOW to turn on LED
 				  HAL_GPIO_WritePin(GPIOA, LED_1_Pin, GPIO_PIN_RESET);
 			   }
 
@@ -118,7 +119,7 @@ int main(void)
 				{
 			        //Transmit 2 to ESP32
 					HAL_UART_Transmit(&huart7,  rx_buffer, 1, 10);
-					//set PA2 as LOW
+					//set PA2 as LOW to turn on LED
 					HAL_GPIO_WritePin(GPIOA, LED_2_Pin, GPIO_PIN_RESET);
 				}
 
@@ -126,7 +127,7 @@ int main(void)
 				{
 			        //Transmit 3 to ESP32
 					HAL_UART_Transmit(&huart7,  rx_buffer, 1, 10);
-					//set PH2 as LOW
+					//set PH2 as LOW to turn on LED
 					HAL_GPIO_WritePin(LED_3_GPIO_Port, LED_3_Pin, GPIO_PIN_RESET);
 				}
 
@@ -134,7 +135,7 @@ int main(void)
 				{
 			        //Transmit 0 to ESP32
 					HAL_UART_Transmit(&huart7,  rx_buffer, 1, 10);
-					//set PA1, PA2, PH2 as LOW
+					//set PA1, PA2, PH2 as LOW to turn off LEDs
 					HAL_GPIO_WritePin(GPIOA, LED_1_Pin, GPIO_PIN_SET);
 					HAL_GPIO_WritePin(GPIOA, LED_2_Pin, GPIO_PIN_SET);
 					HAL_GPIO_WritePin(LED_3_GPIO_Port, LED_3_Pin, GPIO_PIN_SET);
